@@ -4,7 +4,11 @@
     <table>
         <tr valign="top">
             <td><img src="{{ user.avatar(128) }}"></td>
-            <td><h2>User: {{ user.username }}</h2></td>
+            <td>
+                <h2>User: {{ user.username }}</h2>
+                {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+                {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
+            </td>
         </tr>
     </table>
     {% for post in posts %}
