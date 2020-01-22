@@ -104,3 +104,6 @@ dev/
 
 # VSCode
 .vscode/
+
+# Database
+app.db
