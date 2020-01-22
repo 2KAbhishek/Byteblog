@@ -107,3 +107,6 @@ dev/
 
 # Database
 app.db
+
+# Logs
+logs/
