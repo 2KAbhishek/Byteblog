@@ -8,8 +8,11 @@
         </tr>
     </table>
     {% for post in posts %}
-    <p>
-        {{ post.author.username }} says: <b>{{ post.body }}</b>
-    </p>
+    <table>
+        <tr valign="top">
+            <td><img src="{{ post.author.avatar(36) }}"></td>
+            <td>{{ post.author.username }} says: <br>{{ post.body }}</td>
+        </tr>
+    </table>
     {% endfor %}
 {% endblock %}
