@@ -6,8 +6,15 @@
             <td><img src="{{ user.avatar(128) }}"></td>
             <td>
                 <h2>User: {{ user.username }}</h2>
-                {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-                {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
+                {% if user.about_me %}
+                <p>{{ user.about_me }}</p>
+                {% endif %}
+                {% if user.last_seen %}
+                <p>Last seen on: {{ user.last_seen }}</p>
+                {% endif %}
+                {% if user == current_user %}
+                <p><a href="{{ url_for('edit_profile') }}">Edit profile</a></p>
+                {% endif %}
             </td>
         </tr>
     </table>
