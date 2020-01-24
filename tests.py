@@ -12,5 +12,11 @@ class UserModelCase(unittest.TestCase):
         db.session.remove()
         db.drop_all()
 
+    def test_password_hashing(self):
+        u = User (username='abhishek')
+        u.set_password('correct-mundo')
+        self.assertFalse(u.check_password('incorrecto'))
+        self.assertTrue(u.check_password('correct-mundo'))
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
