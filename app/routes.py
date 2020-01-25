@@ -2,8 +2,8 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
-from app.models import User
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm
+from app.models import User, Post
 from datetime import datetime
 
 @app.before_request
@@ -16,13 +16,20 @@ def before_request():
 @app.route('/index')
 @login_required
 def index():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been shared!')
+        return redirect(url_for('index'))
     posts = [
         {
             'author': {'username': 'Abhishek'},
             'body': 'Welcome to Byteblog!'
         }
     ]
-    return render_template('index.html', title='Home', posts=posts)
+    return render_template('index.html', title='Byteblog', form=form, posts=posts)
 
 
 @app.route('/login', methods=['GET', 'POST'])
