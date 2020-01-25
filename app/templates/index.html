@@ -8,9 +8,9 @@
         <p>
             {{ form.post.label }}<br>
             {{ form.post(cols=32, rows=4) }}<br>
-            {{% for error in form.post.errors %}}
+            {% for error in form.post.errors %}
             <span style="color: red;">[{{ error }}]</span>
-            {{ endfor }}
+            {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
     </form>

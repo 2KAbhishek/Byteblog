@@ -12,8 +12,8 @@ def before_request():
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET','POST'])
+@app.route('/index', methods=['GET','POST'])
 @login_required
 def index():
     form = PostForm()
@@ -23,13 +23,8 @@ def index():
         db.session.commit()
         flash('Your post has been shared!')
         return redirect(url_for('index'))
-    posts = [
-        {
-            'author': {'username': 'Abhishek'},
-            'body': 'Welcome to Byteblog!'
-        }
-    ]
-    return render_template('index.html', title='Byteblog', form=form, posts=posts)
+    posts = current_user.followed_posts().all()
+    return render_template('index.html', title='Home', form=form, posts=posts)
 
 
 @app.route('/login', methods=['GET', 'POST'])

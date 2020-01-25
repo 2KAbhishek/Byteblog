@@ -45,6 +45,6 @@ class EditProfileForm(FlaskForm):
                 raise ValidationError('Username already taken.')
 
 class PostForm(FlaskForm):
-    post = TextAreaField('What's byting you?', validators=[
+    post = TextAreaField('What\'s byting you?', validators=[
         DataRequired(), Length(min=1,max=140)])
     submit = SubmitField('Share')
