@@ -102,9 +102,6 @@ dmypy.json
 # Virualenv
 dev/
 
-# VSCode
-.vscode/
-
 # Database
 app.db
 
