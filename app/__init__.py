@@ -19,6 +19,9 @@ mail = Mail(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
+from app.errors import bp as errors_bp
+app.register_blueprint(errors_bp)
+
 if not app.debug:
 
     if app.config['MAIL_SERVER']:
@@ -49,4 +52,4 @@ if not app.debug:
         app.logger.setLevel(logging.INFO)
         app.logger.info('Byteblog startup')
 
-from app import routes, models, errors
+from app import routes, models
