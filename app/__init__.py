@@ -9,12 +9,11 @@ from config import Config
 import os, logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
-app = Flask(__name__)
-app.config.from_object(Config)
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
 login.login_view = 'auth.login'
+login.login_message = 'Please log in to access this page.'
 mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
