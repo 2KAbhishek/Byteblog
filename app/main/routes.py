@@ -1,7 +1,7 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, url_for, request, current_app
+from flask import render_template, flash, redirect, url_for, request, current_app, g
 from flask_login import current_user, login_required
-from app.main.forms import EditProfileForm, PostForm
+from app.main.forms import EditProfileForm, PostForm, SearchForm
 from app.models import User, Post
 from app.main import bp
 from app import db
@@ -12,6 +12,7 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+        g.search_form = SearchForm()
 
 @bp.route('/', methods=['GET','POST'])
 @bp.route('/index', methods=['GET','POST'])
