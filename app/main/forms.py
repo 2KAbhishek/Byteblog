@@ -22,4 +22,3 @@ class EditProfileForm(FlaskForm):
 class PostForm(FlaskForm):
     post = TextAreaField('What\'s byting you?', validators=[DataRequired(), Length(min=1,max=140)])
     submit = SubmitField('Share')
-    submit = SubmitField('Reset Password')
