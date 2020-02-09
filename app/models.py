@@ -100,3 +100,11 @@ class SearchableMixin(object):
             when.append((ids[i],[i]))
         return cls.query.filter_by(cls.id.in_(ids)).order_by(
         db.case(when, value=cls.id)), total
+
+    @classmethod
+    def before_commit(cls, session):
+        session._changes = {
+            'add': list(session.new),
+            'update': list(session.dirty),
+            'delete': list(session.deleted)
+        }
