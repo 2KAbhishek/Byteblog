@@ -8,6 +8,7 @@ from flask_moment import Moment
 from config import Config
 import os, logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
+from elastisearch import Elastisearch
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -39,6 +40,9 @@ def create_app(config_class=Config):
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
+
+        app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
+        if app.config['ELASTICSEARCH_URL'] else None
 
     if not app.debug and not app.testing:
 
