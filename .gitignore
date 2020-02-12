@@ -107,3 +107,6 @@ app.db
 
 # Logs
 logs/
+
+# Vagrant
+.vagrant/
