@@ -107,6 +107,7 @@ app.db
 
 # Logs
 logs/
+*.log
 
 # Vagrant
 .vagrant/
