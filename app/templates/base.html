@@ -18,17 +18,17 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    {% if g.search_form %}
+                    <form class="navbar-form navbar-left" method="get" action="{{ url_for('main.search') }}">
+                        <div class="form-group">
+                            {{ g.search_form.q(size=20, class='form-control', placeholder=g.search_form.q.label.text) }}
+                        </div>
+                    </form>
+                    {% endif %}
                     <li><a href="{{ url_for('main.index') }}">Home</a></li>
                     <li><a href="{{ url_for('main.explore') }}">Explore</a></li>
                 </ul>
 
-                {% if g.search_form %}
-                <form class="navbar-form navbar-left" method="get" action="{{ url_for('main.search') }}">
-                    <div class="form-group">
-                        {{ g.search_form.q(size=20, class='form-control', placeholder=g.search_form.q.label.text) }}
-                    </div>
-                </form>
-                {% endif %}
 
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_anonymous %}
