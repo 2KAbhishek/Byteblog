@@ -2,7 +2,12 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
+    {% if current_user.is_authenticated %}
     <h1>Hi, {{ current_user.username }}!</h1>
+    {% else %}
+    <h3>Welcome to Byteblog!</h3>
+    <h5>Please login to access all features.</h5>
+    {% endif %}
     {% if form %}
     {{ wtf.quick_form(form) }}
     <br>
