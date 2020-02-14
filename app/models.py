@@ -28,6 +28,16 @@ class User(UserMixin, db.Model):
         secondaryjoin=(followers.c.followed_id == id),
         backref=db.backref('followers', lazy ='dynamic'), lazy='dynamic')
 
+    messages_sent = db.relationship(
+        'Message', foreign_keys='Message.sender_id',
+        backref='author', lazy='dynamic')
+
+    messages_received = db.relationship(
+        'Message', foreign_keys='Message.recipient_id',
+        backref='recipient', lazy='dynamic')
+
+    last_message_read_time = db.Column(db.DateTime)
+
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
