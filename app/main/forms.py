@@ -7,7 +7,7 @@ from app.models import User
 
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
-    about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
+    about_me = TextAreaField('About me', validators=[Length(min=0,max=140)])
     submit = SubmitField('Submit')
 
     def __init__(self, original_username, *args, **kwargs):
@@ -20,10 +20,8 @@ class EditProfileForm(FlaskForm):
             if user is not None:
                 raise ValidationError('Username already taken.')
 
-
 class PostForm(FlaskForm):
-    post = TextAreaField('What\'s byting you?', validators=[
-                         DataRequired(), Length(min=1, max=140)])
+    post = TextAreaField('What\'s byting you?', validators=[DataRequired(), Length(min=1,max=140)])
     submit = SubmitField('Share')
 
 
@@ -37,8 +35,6 @@ class SearchForm(FlaskForm):
             kwargs['csrf_enabled'] = False
         super(SearchForm, self).__init__(*args, **kwargs)
 
-
 class MessageForm(FlaskForm):
-    message = TextAreaField('Message', validators=[
-                            DataRequired(), Length(min=0, max=140)])
+    message = TextAreaField('Message', validators=[DataRequired(), Length(min=0, max=140)])
     submit = SubmitField('Send')
