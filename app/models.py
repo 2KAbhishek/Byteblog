@@ -10,9 +10,12 @@ from app import db, login
 from app.search import add_to_index, remove_from_index, query_index
 
 followers = db.Table('followers',
-    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
-    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
-)
+                     db.Column('follower_id', db.Integer,
+                               db.ForeignKey('user.id')),
+                     db.Column('followed_id', db.Integer,
+                               db.ForeignKey('user.id'))
+                     )
+
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,7 +30,7 @@ class User(UserMixin, db.Model):
         'User', secondary=followers,
         primaryjoin=(followers.c.follower_id == id),
         secondaryjoin=(followers.c.followed_id == id),
-        backref=db.backref('followers', lazy ='dynamic'), lazy='dynamic')
+        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
 
     messages_sent = db.relationship(
         'Message', foreign_keys='Message.sender_id',
@@ -39,7 +42,8 @@ class User(UserMixin, db.Model):
 
     last_message_read_time = db.Column(db.DateTime)
 
-    notifications = db.relationship('Notification', backref='user', lazy='dynamic')
+    notifications = db.relationship(
+        'Notification', backref='user', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -79,7 +83,7 @@ class User(UserMixin, db.Model):
 
     def followed_posts(self):
         followed = Post.query.join(
-            followers,(followers.c.followed_id == Post.user_id)).filter(
+            followers, (followers.c.followed_id == Post.user_id)).filter(
                 followers.c.follower_id == self.id)
         own = Post.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Post.timestamp.desc())
@@ -93,14 +97,16 @@ class User(UserMixin, db.Model):
     def verify_reset_password_token(token):
         try:
             id = jwt.decode(token, current_app.config['SECRET_KEY'],
-            algorithms='HS256')['reset_password']
+                            algorithms='HS256')['reset_password']
         except:
             return
         return User.query.get(id)
 
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
 
 class SearchableMixin(object):
     @classmethod
@@ -110,9 +116,9 @@ class SearchableMixin(object):
             return cls.query.filter_by(id=0), 0
         when = []
         for i in range(len(ids)):
-            when.append((ids[i],[i]))
+            when.append((ids[i], [i]))
         return cls.query.filter(cls.id.in_(ids)).order_by(
-        db.case(when, value=cls.id)), total
+            db.case(when, value=cls.id)), total
 
     @classmethod
     def before_commit(cls, session):
@@ -140,8 +146,10 @@ class SearchableMixin(object):
         for obj in cls.query:
             add_to_index(cls.__tablename__, obj)
 
+
 db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
 db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
+
 
 class Post(SearchableMixin, db.Model):
     __searchable__ = ['body']
@@ -153,6 +161,7 @@ class Post(SearchableMixin, db.Model):
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 
+
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -162,6 +171,7 @@ class Message(db.Model):
 
     def __repr__(self):
         return '<Message {}>'.format(self.body)
+
 
 class Notification(db.Model):
     id = db.Column(db.Integer, primary_key=True)
