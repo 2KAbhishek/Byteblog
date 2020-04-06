@@ -1,8 +1,7 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from time import time
 from hashlib import md5
-import jwt
-import json
+import jwt, json, base64, os
 from flask import current_app, url_for
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -45,6 +44,8 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    token = db.Column(db.String(32), index=True, unique=True)
+    token_expiration = db.Column(db.DateTime)
 
     followed = db.relationship(
         'User', secondary=followers,
