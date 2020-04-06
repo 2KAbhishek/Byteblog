@@ -149,6 +149,15 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
             return
         return User.query.get(id)
 
+    def get_token(self, expires_in=3600):
+        now = datetime.utcnow()
+        if self.token and self.token_expiration > now + timedelta(seconds=60):
+            return self.token
+        self.token = base64.b64encode(os.urandom(24)).decode('utf-8')
+        self.token_expiration = now + timedelta(seconds=expires_in)
+        db.session.add(self)
+        return self.token
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
