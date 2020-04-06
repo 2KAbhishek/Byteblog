@@ -161,6 +161,13 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
     def revoke_token(self):
         self.token_expiration = datetime.utcnow() - timedelta(seconds=1)
 
+    @staticmethod
+    def check_token(token):
+        user = User.query.filter_by(token=token).first()
+        if user is None or user.token_expiration < datetime.utcnow():
+            return None
+        return user
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
