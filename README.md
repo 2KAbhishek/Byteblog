@@ -12,3 +12,18 @@
 Byteblog is a minimalistic microblogging platform for anyone seeking a quieter "Social Media"
 
 [Visit](https://byteblog.herokuapp.com)
+
+## Technologies Used
+
+- Python Flask
+- SQL Alchemy
+- Bootstrap
+- Various flask plugins
+
+## Features
+
+- Posts
+- Follow/Unfollow Users
+- Messages
+- Notifications
+- API Support
