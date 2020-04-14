@@ -9,7 +9,7 @@
 ![Contributors](https://img.shields.io/github/contributors/2kabhishek/Byteblog?style=plastic&color=ff69b4&label=Contributors)
 ![Followers](https://img.shields.io/github/followers/2kabhishek?style=plastic&color=blue&label=Followers)
 
-Byteblog is a minimalistic microblogging platform for anyone seeking a quieter "Social Media"
+Byteblog is a minimalist micro-blogging platform for anyone seeking a quieter "Social Media".
 
 [Visit](https://byteblog.herokuapp.com)
 
