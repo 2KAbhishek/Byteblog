@@ -1,5 +1,3 @@
-<div align="center">
-
 # Byteblog
 
 ![Size](https://img.shields.io/github/repo-size/2kabhishek/Byteblog?style=plastic&color=0f0&label=Size)
@@ -13,7 +11,6 @@
 Byteblog is a minimalist micro-blogging platform built with Pyhton Flask for anyone seeking a quieter "Social Media".
 [Visit](https://byteblog.herokuapp.com)
 
-</div>
 
 A user can easily register for Byteblog with their email id and password and then can easily share their bytes (similar to tweets in twitter) and also follow other people to read their thoughts, users can also message other users who follow them.
 
@@ -60,5 +57,4 @@ Byteblog has JSON API support added to it so developers can add new API routes a
 - Testing Support:
 Byteblog has testing support added to it so that changes can be verified before deploying to production, new tests can be added easily too.
 
-Please consider hitting the ⭐ star button if this repo was useful to you, any contributions and suggestions are welcome.
 
