@@ -11,7 +11,6 @@
 Byteblog is a minimalist micro-blogging platform built with Pyhton Flask for anyone seeking a quieter "Social Media".
 [Visit](https://byteblog.herokuapp.com)
 
-
 A user can easily register for Byteblog with their email id and password and then can easily share their bytes (similar to tweets in twitter) and also follow other people to read their thoughts, users can also message other users who follow them.
 
 ## Features
@@ -37,24 +36,22 @@ It was created to learn about various concepts of web application development in
 Here are a few technical highlights of Byteblog.
 
 - Modular Design:
-Built with Flask Blueprint to promote code reusability and modular design, parts of this project can be integrated into other projects without much changes.
+  Built with Flask Blueprint to promote code reusability and modular design, parts of this project can be integrated into other projects without much changes.
 
 - Universal Database Support:
-Uses SQL Alchemy for database interactions and can work with any database.
+  Uses SQL Alchemy for database interactions and can work with any database.
 
 - Migrate Database:
-Built with Flask Migrate to aid in database migrations, a database migration can be done with one simple command `flask db upgrade`.
+  Built with Flask Migrate to aid in database migrations, a database migration can be done with one simple command `flask db upgrade`.
 
 - Universal Deployment:
-Byteblog comes with all the configurations so that it can be deployed locally, on Docker, on VirtualBox and Heroku.
+  Byteblog comes with all the configurations so that it can be deployed locally, on Docker, on VirtualBox and Heroku.
 
 - Ephemeral Database:
-Byteblog's production deployment on Heroku uses an ephemeral database which guarantees user data security and privacy.
+  Byteblog's production deployment on Heroku uses an ephemeral database which guarantees user data security and privacy.
 
 - REST API Support:
-Byteblog has JSON API support added to it so developers can add new API routes and build apps for any platform they wish.
+  Byteblog has JSON API support added to it so developers can add new API routes and build apps for any platform they wish.
 
 - Testing Support:
-Byteblog has testing support added to it so that changes can be verified before deploying to production, new tests can be added easily too.
-
-
+  Byteblog has testing support added to it so that changes can be verified before deploying to production, new tests can be added easily too.
