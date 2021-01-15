@@ -8,15 +8,14 @@
 ![Contributors](https://img.shields.io/github/contributors/2kabhishek/Byteblog?style=plastic&color=f0f&label=Contributors)
 ![License](https://img.shields.io/github/license/2kabhishek/Byteblog?style=plastic&color=555&label=License)
 
-Byteblog is a minimalist micro-blogging platform built with Pyhton Flask for anyone seeking a quieter "Social Media".
-
-[Visit](https://byteblog.herokuapp.com)
-
 <a href="https://www.producthunt.com/posts/byteblog?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-byteblog" target="_blank">
   <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=281145&theme=dark" 
        alt="Byteblog - Open Source blogging platform, share your thoughts in bytes. | Product Hunt" 
        style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
+Byteblog is a minimalist micro-blogging platform built with Pyhton Flask for anyone seeking a quieter "Social Media".
+
+[Visit](https://byteblog.herokuapp.com)
 
 A user can easily register for Byteblog with their email id and password and then can easily share their bytes (similar to tweets in twitter) and also follow other people to read their thoughts, users can also message other users who follow them.
 
