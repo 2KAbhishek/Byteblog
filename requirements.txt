@@ -16,7 +16,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.3
 Mako==1.1.1
 MarkupSafe==1.1.1
-PyJWT==1.7.1
+PyJWT==2.4.0
 python-dateutil==2.8.1
 python-dotenv==0.10.5
 python-editor==1.0.4
