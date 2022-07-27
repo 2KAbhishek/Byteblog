@@ -1,6 +1,6 @@
 <div align = "center">
 
-<h1><a href="https://2kabhishek.github.io/Byteblog">BareMinimum</a></h1>
+<h1><a href="https://2kabhishek.github.io/Byteblog">Byteblog</a></h1>
 
 <a href="https://github.com/2KAbhishek/Byteblog/blob/main/LICENSE">
 <img alt="License" src="https://img.shields.io/github/license/2kabhishek/Byteblog?style=flat&color=eee&label="> </a>
