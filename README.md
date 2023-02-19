@@ -83,6 +83,6 @@ pip install virtualenv
 virtualenv env
 source env/bin/activate
 pip install -r ./requirements/development.txt
-flask upgrade
+flask db upgrade
 flask run
 ```
