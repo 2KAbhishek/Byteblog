@@ -29,8 +29,6 @@
 
 Byteblog is a minimalist micro-blogging platform built with Pyhton Flask for anyone seeking a quieter "Social Media".
 
-[Visit](https://byteblog.herokuapp.com)
-
 A user can easily register for Byteblog with their email id and password and then can easily share their bytes (similar to tweets in twitter) and also follow other people to read their thoughts, users can also message other users who follow them.
 
 ## Features
@@ -41,7 +39,6 @@ A user can easily register for Byteblog with their email id and password and the
 - Notifications
 
 It was created to learn about various concepts of web application development including concepts like authentication, localization, deployments, testing, REST API building etc.
-
 
 ## Technologies Used
 
@@ -76,3 +73,16 @@ Here are a few technical highlights of Byteblog.
 
 - Testing Support:
   Byteblog has testing support added to it so that changes can be verified before deploying to production, new tests can be added easily too.
+
+## Dev Setup
+
+```bash
+git clone https://github.com/2kabhishek/Byteblog
+cd Byteblog
+pip install virtualenv
+virtualenv env
+source env/bin/activate
+pip install -r ./requirements/development.txt
+flask upgrade
+flask run
+```
