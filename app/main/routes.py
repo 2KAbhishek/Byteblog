@@ -1,10 +1,12 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, url_for, request, current_app, g
+
+from flask import current_app, flash, g, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
-from app.main.forms import EditProfileForm, PostForm, SearchForm, MessageForm
-from app.models import User, Post, Message, Notification
-from app.main import bp
+
 from app import db
+from app.main import bp
+from app.main.forms import EditProfileForm, MessageForm, PostForm, SearchForm
+from app.models import Message, Notification, Post, User
 
 
 @bp.before_request
@@ -14,8 +16,9 @@ def before_request():
         db.session.commit()
         g.search_form = SearchForm()
 
-@bp.route('/', methods=['GET','POST'])
-@bp.route('/index', methods=['GET','POST'])
+
+@bp.route('/', methods=['GET', 'POST'])
+@bp.route('/index', methods=['GET', 'POST'])
 def index():
     if current_user.is_authenticated:
         form = PostForm()
@@ -27,21 +30,27 @@ def index():
             return redirect(url_for('main.index'))
         page = request.args.get('page', 1, type=int)
         posts = current_user.followed_posts().paginate(
-            page, current_app.config['POSTS_PER_PAGE'], False)
-        next_url = url_for('main.index', page=posts.next_num) if posts.has_next else None
-        prev_url = url_for('main.index', page=posts.prev_num) if posts.has_prev else None
+            page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
+        next_url = url_for(
+            'main.index', page=posts.next_num) if posts.has_next else None
+        prev_url = url_for(
+            'main.index', page=posts.prev_num) if posts.has_prev else None
         return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
     else:
         return redirect(url_for('main.explore'))
+
 
 @bp.route('/explore')
 def explore():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
-        page, current_app.config['POSTS_PER_PAGE'], False)
-    next_url = url_for('main.explore', page=posts.next_num) if posts.has_next else None
-    prev_url = url_for('main.explore', page=posts.prev_num) if posts.has_prev else None
+        page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
+    next_url = url_for(
+        'main.explore', page=posts.next_num) if posts.has_next else None
+    prev_url = url_for(
+        'main.explore', page=posts.prev_num) if posts.has_prev else None
     return render_template('index.html', title='Explore', posts=posts.items, next_url=next_url, prev_url=prev_url)
+
 
 @bp.route('/user/<username>')
 @login_required
@@ -49,18 +58,20 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
     posts = user.posts.order_by(Post.timestamp.desc()).paginate(
-        page, current_app.config['POSTS_PER_PAGE'], False)
+        page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
     next_url = url_for('main.user', username=user.username, page=posts.next_num) \
         if posts.has_next else None
     prev_url = url_for('main.user', username=user.username, page=posts.prev_num) \
         if posts.has_prev else None
     return render_template('user.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url)
 
+
 @bp.route('/user/<username>/popup')
 @login_required
 def user_popup(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user_popup.html', user=user)
+
 
 @bp.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
@@ -77,6 +88,7 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile', form=form)
 
+
 @bp.route('/follow/<username>')
 @login_required
 def follow(username):
@@ -91,6 +103,7 @@ def follow(username):
     db.session.commit()
     flash('You are following {}!'.format(username))
     return redirect(url_for('main.user', username=username))
+
 
 @bp.route('/unfollow/<username>')
 @login_required
@@ -107,6 +120,7 @@ def unfollow(username):
     flash('You are not following {}.'.format(username))
     return redirect(url_for('main.user', username=username))
 
+
 @bp.route('/search')
 @login_required
 def search():
@@ -117,9 +131,11 @@ def search():
                                current_app.config['POSTS_PER_PAGE'])
     next_url = url_for('main.search', q=g.search_form.q.data, page=page + 1) \
         if total > page * current_app.config['POSTS_PER_PAGE'] else None
-    prev_url = url_for('main.search', q=g.search_form.q.data, page=page - 1) if page > 1 else None
+    prev_url = url_for('main.search', q=g.search_form.q.data,
+                       page=page - 1) if page > 1 else None
     return render_template('search.html', title='Search', posts=posts,
                            next_url=next_url, prev_url=prev_url)
+
 
 @bp.route('/send_message/<recipient>', methods=['GET', 'POST'])
 @login_required
@@ -137,6 +153,7 @@ def send_message(recipient):
     return render_template('send_message.html', title='Send Message',
                            form=form, recipient=recipient)
 
+
 @bp.route('/messages')
 @login_required
 def messages():
@@ -146,13 +163,14 @@ def messages():
     page = request.args.get('page', 1, type=int)
     messages = current_user.messages_received.order_by(
         Message.timestamp.desc()).paginate(
-            page, current_app.config['POSTS_PER_PAGE'], False)
+            page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
     next_url = url_for('main.messages', page=messages.next_num) \
         if messages.has_next else None
     prev_url = url_for('main.messages', page=messages.prev_num) \
         if messages.has_prev else None
     return render_template('messages.html', messages=messages.items,
                            next_url=next_url, prev_url=prev_url)
+
 
 @bp.route('/notifications')
 @login_required
