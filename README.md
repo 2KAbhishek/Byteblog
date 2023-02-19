@@ -19,13 +19,12 @@
 
 <a href="https://github.com/2KAbhishek/Byteblog/pulse">
 <img alt="Last Updated" src="https://img.shields.io/github/last-commit/2kabhishek/Byteblog?style=flat&color=e06c75&label="> </a>
-
-</div>
-
+<br>
 <a href="https://www.producthunt.com/posts/byteblog?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-byteblog" target="_blank">
   <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=281145&theme=dark"
        alt="Byteblog - Open Source blogging platform, share your thoughts in bytes. | Product Hunt"
        style="width: 250px; height: 54px;" width="250" height="54" /></a>
+</div>
 
 Byteblog is a minimalist micro-blogging platform built with Pyhton Flask for anyone seeking a quieter "Social Media".
 
