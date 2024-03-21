@@ -1,5 +1,5 @@
 alembic==1.9.4
-black==23.1.0
+black==24.3.0
 blinker==1.5
 certifi==2023.7.22
 chardet==5.1.0
