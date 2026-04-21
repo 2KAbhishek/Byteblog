@@ -41,7 +41,7 @@ PyJWT==2.12.0
 pynvim==0.4.3
 PySocks==1.7.1
 python-dateutil==2.8.2
-python-dotenv==0.21.1
+python-dotenv==1.2.2
 python-editor==1.0.4
 requests==2.33.0
 requests-toolbelt==0.10.1
