@@ -20,7 +20,7 @@ Flask-Moment==1.0.5
 Flask-SQLAlchemy==3.0.3
 Flask-WTF==1.1.1
 httpie==3.2.1
-idna==3.7
+idna==3.15
 itsdangerous==2.1.2
 Jinja2==3.1.6
 Mako==1.2.4
